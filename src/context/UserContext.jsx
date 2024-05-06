@@ -54,8 +54,7 @@ export const UserContextProvider = ({children}) => {
     const putReq = (url, data, type) => {
         let headers = {'Content-Type': 'application/json'}
         let body = JSON.stringify(data)
-        console.log(body)
-        if (type === 'formData') {
+        if (type === 'formData' ) {
             headers = {'Authorization': `Bearer ${token}`}
             body = data
         }
@@ -75,7 +74,6 @@ export const UserContextProvider = ({children}) => {
             headers = { 'Authorization': `Bearer ${token}`}
             body = data
         }
-        console.log(headers, body)
         return clientRequest(url, "POST", headers, body)
     }
     
