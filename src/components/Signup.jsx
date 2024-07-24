@@ -14,7 +14,7 @@ function Signup() {
         const {name, value} = e.target
         setUser({...user, [name]: value})
     }
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
@@ -55,7 +55,7 @@ function Signup() {
     }
     return (
         <div className='w-full h-screen'>
-            <Navbar/>
+            <Navbar />
             <div className='w-full h-[90vh] flex flex-col items-center justify-center gap-5'>
                 <form className='w-1/2 h-3/4 border-2 border-purple-900 p-10 flex flex-col items-center gap-5' onSubmit={handleSubmit} noValidate>
                     <h3 className='text-2xl text-purple-900 mb-10'>Create Your Account</h3>

@@ -1,5 +1,6 @@
 import {createContext, useState} from 'react'
 
+
 const UserContext = createContext({})
 
 export const UserContextProvider = ({children}) => { 
@@ -30,8 +31,8 @@ export const UserContextProvider = ({children}) => {
         return fetch(url, fetchOptions)
         .then(res => {
             if(res.status === 401){
-                throw new Error('Not Authenticated')
                 logOut()
+                throw new Error('Not Authenticated')    
             }
             if(!res.ok){
                 console.log('resStatus: ' + res.status)
