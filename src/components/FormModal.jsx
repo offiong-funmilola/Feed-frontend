@@ -99,7 +99,7 @@ function FormModal({
 
     return (
         <div className={`modal ${postModal ? 'modal-open' : ''}`}>
-            <div className="modal-box w-full h-3/4">
+            <div className="modal-box w-full">
                 <form method='POST' onSubmit={handleSubmit} className='w-full h-full p-5 bg-purple-300 flex flex-col gap-3 items-center justify-center' noValidate>
                     <h4 className='text-center text-2xl'>Create a new Post</h4>
                     <div className='w-full h-15 flex flex-col gap-2 text-xl'>

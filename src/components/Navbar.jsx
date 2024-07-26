@@ -5,11 +5,11 @@ import UserContext from "../context/UserContext"
 function Navbar() {
     const navigate = useNavigate()
     const {loggedIn, logOut} = useContext(UserContext)
+    console.log(loggedIn)
 
     const handleLogOut = () => {
         logOut()
         navigate('/')
-
     }
     return (
         <div className="w-full h-[10vh] p-10 flex items-center justify-between bg-purple-900">
@@ -30,7 +30,6 @@ function Navbar() {
                     </NavLink> 
                 </>
                 }
-                
                 {loggedIn && 
                 <> 
                     <NavLink to='/feed'>

@@ -21,7 +21,6 @@ function Login() {
         try{
             let data = await postReq('http://localhost:8080/auth/login', user)
             console.log(postReq('http://localhost:8080/auth/login', user))
-            console.log(data)
             localStorage.setItem('token', data.token)
             localStorage.setItem('userId', data.userId)
             alert(data.message)

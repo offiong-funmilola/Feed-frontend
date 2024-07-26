@@ -7,6 +7,7 @@ export const UserContextProvider = ({children}) => {
     const [creator, setCreator] = useState({id: '', name: ''})
     const [loggedIn, setLoggedIn] = useState(false)
     const token = localStorage.getItem('token')
+    
  
     const clientRequest = (url, type, header, data) => {
         let fetchOptions = {
@@ -42,8 +43,9 @@ export const UserContextProvider = ({children}) => {
         })
         .then(result => {
             return result
+            
         })
-        .catch(err => {console.log(err)})
+        .catch(err => {console.log(err)})    
     }
 
     const getReq = (url) => {

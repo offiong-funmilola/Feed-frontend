@@ -3,6 +3,7 @@ import { Link, useSearchParams,} from 'react-router-dom'
 import UserContext from '../context/UserContext'
 import FormModal from './FormModal'
 import Status from './Status'
+import openSocket from 'socket.io-client'
 
 
 function Post() {
@@ -20,10 +21,23 @@ function Post() {
     useEffect(() => {
         console.log('from useeffect')
         fetchData()
+        const socket = openSocket.connect('http://localhost:8080')
+        socket.on('posts', data => {
+            if (data.action === 'create'){
+                addPost(data.post)
+            }
+            if (data.action === 'update'){
+                updatePost(data.post)
+            }
+            if(data.action === 'delete'){
+                fetchData()
+            }
+        })
     }, [currentPage])
 
     const fetchData = async () => {
         try{
+            //Am using the search params here for pagination. 
             const data = await getReq(`http://localhost:8080/feed/posts?${searchParams}`)
             setPosts(data.posts)
             setTotalItem(data.totalItems)
@@ -46,6 +60,22 @@ function Post() {
         //     setTotalItem(resData.totalItems)
         // })
         // .catch(err => {console.log(err)})
+    }
+
+    const addPost = (post) => {
+        let updatedPosts = [...posts]
+        updatedPosts = updatedPosts.unshift(post)
+        setPosts(updatedPosts)
+    }
+
+    const updatePost = (post) => {
+        let updatedPosts = [...posts]
+        let postIndex = updatedPosts.findIndex((p) => {p.id === post._id})
+        if (postIndex > -1){
+            // recall that index can be zero
+            updatedPosts[postIndex] = post
+        }
+        setPosts(updatedPosts )   
     }
 
     const handleEdit = async (postId) => {
@@ -111,7 +141,7 @@ function Post() {
         setSearchParams({ page: currentPage - 1 });
         
     }
-
+    console.log(posts)
     return (
         <div className='w-full h-[90vh] flex flex-col items-center justify-center'>
             <Status />
